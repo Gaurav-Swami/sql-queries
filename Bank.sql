@@ -20,9 +20,56 @@ INSERT INTO employees (emp_id, fname, lname, email, dept, salary, hire_date) VAL
 (9, 'Anjali', 'Mehta', 'anjali.mehta@example.com', 'Finance', 61000.00, '2018-12-03'),
 (10, 'Vijay', 'Nair', 'vijay.nair@example.com', 'Marketing', 50000.00, '2020-04-19');
 
+
+-- serial number helps in automatically enterint the number values if they are in SEQUENCE
+
 INSERT INTO employees (fname,lname,email,dept) VALUES ('Gaurav','Swami','gauravswami@gmail.com','IT');
 INSERT INTO employees (fname,lname,email,dept) VALUES ('Bhanwarlald','Swamid','bhanwarlal@gmail.com','IT');
 
 SELECT * FROM employees;
 
+--where clause
+
 DELETE FROM employees WHERE emp_id = 11 OR emp_id = 12;
+select * from employees where emp_id = 5;
+
+select * FROM employees where dept = 'HR';
+
+select * from employees where salary >= 50000.0;
+
+--logical operators
+select * from employees where dept = 'HR' or dept = 'IT';
+
+select * from employees where dept = 'IT' and salary > 50000;
+select * from employees where dept = 'IT' and salary <= 50000;
+select * from employees where dept in ('HR', 'IT', 'Finance');
+select * from employees where dept not in ('HR', 'IT', 'Finance');
+
+--between
+
+select * from employees where salary between 40000 and 65000;
+
+--distinct (unique values)
+select distinct dept from employees dept;
+
+--Order by (following a specific sequence)
+select * from employees order by fname;
+
+--Descending
+select * from employees order by fname desc;
+select * from employees order by emp_id desc;
+
+--limit
+select * from employees limit 3;
+
+--like clause
+select * from employees where fname like 'A%';
+select * from employees where fname like '%a';
+select * from employees where lname like '%a';
+select * from employees where fname like 'R__';
+
+
+
+
+
+
