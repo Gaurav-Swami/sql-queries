@@ -119,4 +119,23 @@ select left(fname,3), right(lname,3) from employees;
 --trim()
 select trim(' gaurav '), length(' gaurav '), length('gaurav');
 
+--position()
+select position('av' in 'gaurav');
+
+--exercise
+
+select concat_ws(':',fname,lname,dept) from employees where emp_id = 1;
+select concat_ws(':',fname,lname,dept,salary) from employees where emp_id = 1;
+select concat_ws(':',concat_ws(' ',fname,lname),dept,salary) from employees where emp_id = 1;
+
+select concat_ws(':',emp_id,fname,upper(dept)) from employees where emp_id = 4;
+
+select concat_ws(' ', concat(left(dept,1),emp_id),fname) from employees where emp_id < 3;
+
+select dept from employees group by dept;
+select * from employees order by salary desc;
+select * from employees limit 3;
+select * from employees where fname like 'A%';
+select * from employees where length(lname)=4;		
+
 
