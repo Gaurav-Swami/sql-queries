@@ -68,8 +68,55 @@ select * from employees where fname like '%a';
 select * from employees where lname like '%a';
 select * from employees where fname like 'R__';
 
+--counting records (using primary key is recommended)
+select count(emp_id) from employees;
 
+--summing up salary
+select sum(salary) from employees;
 
+--average salary
+select avg(salary) from employees;
 
+--minimum and max 
+select min(salary) from employees;
+select max(salary) from employees;
+
+-- group by
+select dept, count(emp_id) from employees group by dept;
+select dept, sum(salary) from employees group by dept;
+
+-- String functions
+
+-- concat
+select concat('hello'	,'world');
+select concat(fname, ' ', lname) as name from employees ;
+
+--concat_ws()
+select concat_ws(' ',fname,lname) as fullname from employees;
+
+--substr ()
+select substr('hello budddy', 7);
+
+--replace()
+select replace ('abcxyz','abc','uvw');
+select replace(dept,'IT','Tech') from employees;
+
+--reverse()
+select reverse('hello');
+select reverse('gaurav');
+select reverse(fname) from employees;
+
+--length()
+select  length(fname),fname from employees;
+select * from employees where length(fname)>5;
+
+-- upper() and lower()
+select upper(fname), lower(lname) from employees;
+
+--left() and right()
+select left(fname,3), right(lname,3) from employees;
+
+--trim()
+select trim(' gaurav '), length(' gaurav '), length('gaurav');
 
 
