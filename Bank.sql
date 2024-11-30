@@ -136,6 +136,14 @@ select dept from employees group by dept;
 select * from employees order by salary desc;
 select * from employees limit 3;
 select * from employees where fname like 'A%';
-select * from employees where length(lname)=4;		
+select * from employees where length(lname)=4;
+select count(emp_id) from employees;
+select dept, count(emp_id) from employees group by dept;
+select min(salary) from employees;
+select max(salary) from employees;
+select sum(salary) from employees where dept = 'HR';
 
+--finding details of the max salaried person
+select * from employees order by salary desc limit 1;
+select * from employees where salary = (select max(salary) from employees);
 
