@@ -147,3 +147,36 @@ select sum(salary) from employees where dept = 'HR';
 select * from employees order by salary desc limit 1;
 select * from employees where salary = (select max(salary) from employees);
 
+--Case
+select fname, salary, 
+CASE WHEN salary>= 50000 THEN 'high' 
+ELSE 'low' 
+END AS sal_cat from employees; 
+
+--multiple case
+SELECT fname, salary,
+CASE
+	WHEN salary >55000 THEN 'HIGH'
+	WHEN salary BETWEEN 48000 AND 55000 THEN 'MID'
+	ELSE 'LOW'
+END AS sal_cat
+FROM employees;
+
+--NOW group by the high low and mid category and the recieving number of employees
+SELECT 
+CASE
+	WHEN salary>55000 THEN 'HIGH'
+	WHEN salary BETWEEN 48000 AND 55000 THEN 'MID'
+	ELSE 'LOW'
+	END AS sal_cat,
+COUNT(emp_id) FROM employees
+GROUP BY sal_cat ;
+	
+
+--bonus
+SELECT fname, salary, ROUND(salary*0.1) AS bonus FROM employees
+
+
+
+select fname from employees;
+
