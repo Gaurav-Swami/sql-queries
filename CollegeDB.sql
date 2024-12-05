@@ -40,8 +40,15 @@ INSERT INTO enrollment (s_id,c_id,enrollment_date) VALUES
 (2,3,'2024-02-15'), --Sham enrolled in Chemistry
 (3,3,'2024-03-25'); --Alex enrolled in Chemistry
 
-drop table enrollment;
+--joining tables
+SELECT s.name, c.name, c.fee, e.enrollment_date FROM 
+enrollment e
+JOIN students s ON e.s_id = s.s_id
+JOIN courses c ON e.c_id = c.c_id;
+
 --respective select queries
 SELECT * FROM students;
 SELECT * FROM courses;
 SELECT * FROM enrollment;
+
+
