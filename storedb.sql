@@ -1,66 +1,54 @@
---customers table
-CREATE TABLE customers( 
-	cust_id SERIAL PRIMARY KEY,
-	cust_name VARCHAR(100) NOT NULL
+-- Many to Many Relationship
+
+--student table
+CREATE TABLE students(
+	s_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL
 );
 
---orders table
-CREATE TABLE orders(
-	ord_id SERIAL PRIMARY KEY,
-	ord_date DATE NOT NULL,
-	price NUMERIC NOT NULL,
-	cust_id INTEGER NOT NULL,
-	FOREIGN KEY(cust_id) REFERENCES customers(cust_id)
+--courses table
+CREATE TABLE courses (
+	c_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	fee NUMERIC NOT NULL
 );
 
---add data into customers
-INSERT INTO customers (cust_name) VALUES ('Raju'),('Sham'),('Paul'),('Alex');
+--Enrollment Table
+CREATE TABLE enrollment (
+	enrollment_id SERIAL PRIMARY KEY,
+	s_id INT NOT NULL,
+	c_id INT NOT NULL,
+	enrollment_date DATE NOT NULL,
+	FOREIGN KEY(s_id) REFERENCES students(s_id),
+	FOREIGN KEY(c_id) REFERENCES courses(c_id)
+);
 
---insert data into orders 
-INSERT INTO orders(ord_date,cust_id,price) VALUES
-('2024-01-01',1,250.00),
-('2024-01-15',1,350.00),
-('2024-02-01',2,150.00),
-('2024-03-01',3,450.00),
-('2024-04-04',2,550.00);
+--insert values into students
+INSERT INTO students(name) VALUES ('Raju'),('Sham'),('Alex');
 
---Joins
---cross join
-SELECT * FROM customers CROSS JOIN orders;
+--insert values into courses
+INSERT INTO courses (name,fee) VALUES 
+('Maths', 500.0),
+('Physics',600.0),
+('Chemistry',700.0);
 
---inner join
-SELECT * FROM customers c INNER JOIN orders o ON c.cust_id = o.cust_id ;
+--insert into enrollment
+INSERT INTO enrollment (s_id,c_id,enrollment_date) VALUES
+(1,1,'2024-01-01'), --Raju enrolled in mathematics
+(1,2,'2024-01-15'), --Raju enrolled in Physics
+(2,1,'2024-02-01'), --Sham enrolled in mathematics
+(2,3,'2024-02-15'), --Sham enrolled in Chemistry
+(3,3,'2024-03-25'); --Alex enrolled in Chemistry
 
---inner joing with group by (total order by a person)
-SELECT c.cust_name, count(o.ord_id) 
-FROM customers c
-INNER JOIN orders o 
-ON c.cust_id = o.cust_id 
-GROUP BY (c.cust_name);
+--joining tables
+SELECT s.name, c.name, c.fee, e.enrollment_date FROM 
+enrollment e
+JOIN students s ON e.s_id = s.s_id
+JOIN courses c ON e.c_id = c.c_id;
 
--- above query but also show sum of amount spend
-SELECT c.cust_name, count(o.ord_id), sum(o.price)
-FROM customers c
-INNER JOIN orders o
-ON c.cust_id = o.cust_id
-GROUP BY (c.cust_name);
-
---left join
-SELECT * FROM customers c
-LEFT JOIN orders o
-ON c.cust_id = o.cust_id;
-
---right join 
-SELECT * FROM customers c
-RIGHT JOIN orders o
-ON c.cust_id = o.cust_id;
-
-SELECT * FROM orders o
-RIGHT JOIN customers c
-ON c.cust_id = o.cust_id;
-
--- select for viewing tables
-SELECT * FROM customers;
-SELECT * FROM orders;
+--respective select queries
+SELECT * FROM students;
+SELECT * FROM courses;
+SELECT * FROM enrollment;
 
 
